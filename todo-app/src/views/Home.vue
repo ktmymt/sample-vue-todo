@@ -14,6 +14,9 @@
       </ul>
     </div>
     <div>
+      <input type="submit" value="Add" @click="addTodo" />
+    </div>
+    <div>
       <pre>
         {{ $data }}
       </pre>
@@ -21,11 +24,21 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: "Home",
   data: () => ({
-    lists: [{ title: "test todo", body: "test body text" }]
-  })
+    lists: [{ title: "test todo", body: "test body text" }],
+    title: "",
+    body: ""
+  }),
+  methods: {
+    addTodo: function() {
+      if (this.title === "" || this.body === "") return;
+      this.lists.push({ title: this.title, body: this.body });
+      this.title = "";
+      this.body = "";
+    }
+  }
 };
 </script>
