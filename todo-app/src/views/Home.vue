@@ -12,6 +12,12 @@
       <ul v-for="(list, key) in lists" :key="key">
         <li>key: {{ key }} -> {{ list.title }}</li>
       </ul>
+      <ul v-for="(list, i) in lists" v-bind:key="i">
+        <li>
+          id: {{ i }}, title: {{ list.title }}
+          <button @click="deleteTodo(i)">Delete</button>
+        </li>
+      </ul>
     </div>
     <div>
       <input type="submit" value="Add" @click="addTodo" />
@@ -38,6 +44,9 @@ export default {
       this.lists.push({ title: this.title, body: this.body });
       this.title = "";
       this.body = "";
+    },
+    deleteTodo: function(i) {
+      this.lists.splice(i, 1);
     }
   }
 };
